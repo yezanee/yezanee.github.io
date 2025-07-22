@@ -25,7 +25,7 @@ description:  # used by seo meta and the atom feed
 url: "https://yezanee.github.io"
 
 github:
-  username: yeaznee # change to your GitHub username
+  username: yezanee # change to your GitHub username
 
 social:
   # Change to your full name.
@@ -34,7 +34,7 @@ social:
   email: yezanee@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - http://github.com/yezanee # change to your GitHub homepage
+    - https://github.com/yezanee # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
