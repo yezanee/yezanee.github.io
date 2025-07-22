@@ -9,7 +9,7 @@ tags: [algorithm, 코딩테스트]
 
 ---
 
-https://www.acmicpc.net/problem/2042
+[백준 2042 문제](https://www.acmicpc.net/problem/2042)
 
 <br>
 
