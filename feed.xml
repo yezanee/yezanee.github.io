@@ -1,0 +1,23 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://yezanee.github.io/</id>
+  <title>yezanee</title>
+  <subtitle></subtitle>
+  <updated>2025-07-22T16:38:00+09:00</updated>
+  <author>
+    <name>윤예진</name>
+    <uri>https://yezanee.github.io/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://yezanee.github.io/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="ko"
+    href="https://yezanee.github.io/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2025 윤예진 </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+</feed>
+
+
