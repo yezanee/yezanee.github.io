@@ -174,8 +174,6 @@ order: 2
   border-radius: 50%;
 }
 
-
-
 @media (max-width: 768px) {
   .calendar-container {
     margin: 15px;
@@ -195,103 +193,160 @@ order: 2
     padding: 15px 8px;
     font-size: 13px;
   }
-  
-
 }
 </style>
 
 <script>
-// TIL 게시물 데이터 - 실제 _posts 폴더의 TIL 게시물들과 연동
-const tilPosts = {
-  '2025-08-04': {
-    title: 'TIL - 2025년 8월 4일',
-    url: '/posts/til-250804/',
-  }
-};
+// 여러 방법으로 DOM 로드 확인
+function initCalendar() {
+  console.log('initCalendar 함수 실행됨');
+  
+  // TIL 게시물 데이터 - 실제 _posts 폴더의 TIL 게시물들과 연동
+  const tilPosts = {
+    '2025-08-04': {
+      title: 'TIL - 2025년 8월 4일',
+      url: '/posts/til-250804/',
+    }
+  };
 
-// 최소 날짜 설정 (2025년 8월 1일)
-const MIN_DATE = new Date(2025, 7, 1); // 2025년 8월 1일
+  // 최소 날짜 설정 (2025년 8월 1일)
+  const MIN_DATE = new Date(2025, 7, 1); // 2025년 8월 1일
 
-let currentDate = new Date(2025, 7, 1); // 2025년 8월 1일
+  let currentDate = new Date(2025, 7, 1); // 2025년 8월 1일
 
-function updateCalendar() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  
-  document.getElementById('currentMonth').textContent = `${year}년 ${month + 1}월`;
-  
-  // 이전 월 버튼 비활성화/활성화
-  const prevBtn = document.getElementById('prevMonth');
-  const isMinDate = currentDate.getFullYear() === MIN_DATE.getFullYear() && 
-                   currentDate.getMonth() === MIN_DATE.getMonth();
-  prevBtn.disabled = isMinDate;
-  
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const startDate = new Date(firstDay);
-  startDate.setDate(startDate.getDate() - firstDay.getDay());
-  
-  const calendarBody = document.getElementById('calendarBody');
-  calendarBody.innerHTML = '';
-  
-  const today = new Date();
-  
-  for (let week = 0; week < 6; week++) {
-    const row = document.createElement('tr');
+  function updateCalendar() {
+    console.log('updateCalendar 함수 실행됨');
     
-    for (let day = 0; day < 7; day++) {
-      const cell = document.createElement('td');
-      const currentDate = new Date(startDate);
-      currentDate.setDate(startDate.getDate() + week * 7 + day);
-      
-      const dateString = currentDate.toISOString().split('T')[0];
-      const dayNumber = currentDate.getDate();
-      
-      // 오늘 날짜 체크
-      const isToday = currentDate.toDateString() === today.toDateString();
-      // 현재 월이 아닌 날짜 체크
-      const isOtherMonth = currentDate.getMonth() !== month;
-      // TIL 게시물이 있는 날짜 체크
-      const hasTil = tilPosts[dateString];
-      
-      if (isOtherMonth) {
-        cell.className = 'other-month';
-        cell.textContent = dayNumber;
-      } else if (hasTil) {
-        cell.className = 'has-til';
-        cell.innerHTML = `<a href="${hasTil.url}" title="${hasTil.title}">${dayNumber}</a>`;
-      } else {
-        cell.textContent = dayNumber;
-      }
-      
-      if (isToday) {
-        cell.classList.add('today');
-      }
-      
-      row.appendChild(cell);
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    const monthElement = document.getElementById('currentMonth');
+    console.log('monthElement:', monthElement);
+    
+    if (monthElement) {
+      monthElement.textContent = `${year}년 ${month + 1}월`;
     }
     
-    calendarBody.appendChild(row);
+    // 이전 월 버튼 비활성화/활성화
+    const prevBtn = document.getElementById('prevMonth');
+    console.log('prevBtn:', prevBtn);
+    
+    if (prevBtn) {
+      const isMinDate = currentDate.getFullYear() === MIN_DATE.getFullYear() && 
+                       currentDate.getMonth() === MIN_DATE.getMonth();
+      prevBtn.disabled = isMinDate;
+    }
+    
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay());
+    
+    const calendarBody = document.getElementById('calendarBody');
+    console.log('calendarBody:', calendarBody);
+    
+    if (!calendarBody) {
+      console.error('Calendar body element not found');
+      return;
+    }
+    
+    calendarBody.innerHTML = '';
+    
+    const today = new Date();
+    
+    for (let week = 0; week < 6; week++) {
+      const row = document.createElement('tr');
+      
+      for (let day = 0; day < 7; day++) {
+        const cell = document.createElement('td');
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + week * 7 + day);
+        
+        const dateString = currentDate.toISOString().split('T')[0];
+        const dayNumber = currentDate.getDate();
+        
+        // 오늘 날짜 체크
+        const isToday = currentDate.toDateString() === today.toDateString();
+        // 현재 월이 아닌 날짜 체크
+        const isOtherMonth = currentDate.getMonth() !== month;
+        // TIL 게시물이 있는 날짜 체크
+        const hasTil = tilPosts[dateString];
+        
+        if (isOtherMonth) {
+          cell.className = 'other-month';
+          cell.textContent = dayNumber;
+        } else if (hasTil) {
+          cell.className = 'has-til';
+          cell.innerHTML = `<a href="${hasTil.url}" title="${hasTil.title}">${dayNumber}</a>`;
+        } else {
+          cell.textContent = dayNumber;
+        }
+        
+        if (isToday) {
+          cell.classList.add('today');
+        }
+        
+        row.appendChild(cell);
+      }
+      
+      calendarBody.appendChild(row);
+    }
+    
+    console.log('캘린더 업데이트 완료');
   }
+
+  // 이벤트 리스너
+  const prevBtn = document.getElementById('prevMonth');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const newDate = new Date(currentDate);
+      newDate.setMonth(newDate.getMonth() - 1);
+      
+      // 최소 날짜보다 이전으로 이동하려고 하면 무시
+      if (newDate >= MIN_DATE) {
+        currentDate = newDate;
+        updateCalendar();
+      }
+    });
+  }
+
+  const nextBtn = document.getElementById('nextMonth');
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      updateCalendar();
+    });
+  }
+
+  // 초기화
+  updateCalendar();
 }
 
-// 이벤트 리스너
-document.getElementById('prevMonth').addEventListener('click', () => {
-  const newDate = new Date(currentDate);
-  newDate.setMonth(newDate.getMonth() - 1);
-  
-  // 최소 날짜보다 이전으로 이동하려고 하면 무시
-  if (newDate >= MIN_DATE) {
-    currentDate = newDate;
-    updateCalendar();
+// 여러 방법으로 실행 시도
+console.log('스크립트 로드됨, DOM 상태:', document.readyState);
+
+if (document.readyState === 'loading') {
+  console.log('DOM 로딩 중, DOMContentLoaded 이벤트 등록');
+  document.addEventListener('DOMContentLoaded', initCalendar);
+} else {
+  console.log('DOM 이미 로드됨, 즉시 실행');
+  initCalendar();
+}
+
+// 추가 안전장치: window.onload
+window.addEventListener('load', function() {
+  console.log('window.onload 실행됨');
+  // DOM이 완전히 로드되었지만 캘린더가 아직 초기화되지 않은 경우
+  const calendarBody = document.getElementById('calendarBody');
+  if (calendarBody && calendarBody.children.length === 0) {
+    console.log('캘린더가 비어있음, 재초기화');
+    initCalendar();
   }
 });
 
-document.getElementById('nextMonth').addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  updateCalendar();
-});
-
-// 초기화
-updateCalendar();
+// 즉시 실행도 시도
+setTimeout(function() {
+  console.log('setTimeout으로 지연 실행 시도');
+  initCalendar();
+}, 100);
 </script>
