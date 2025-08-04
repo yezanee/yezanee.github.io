@@ -1,0 +1,297 @@
+---
+title: TIL
+icon: fas fa-graduation-cap
+order: 2
+---
+
+> **Today I Learned** - 오늘 배운 것들을 정리하는 공간입니다.
+{: .prompt-info }
+
+<br>
+
+<div class="calendar-container">
+  <div class="calendar-header">
+    <button id="prevMonth" class="calendar-btn">&lt;</button>
+    <h3 id="currentMonth">2025년 8월</h3>
+    <button id="nextMonth" class="calendar-btn">&gt;</button>
+  </div>
+
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th>일</th>
+        <th>월</th>
+        <th>화</th>
+        <th>수</th>
+        <th>목</th>
+        <th>금</th>
+        <th>토</th>
+      </tr>
+    </thead>
+    <tbody id="calendarBody">
+      <!-- JavaScript로 동적 생성 -->
+    </tbody>
+  </table>
+</div>
+
+<style>
+.calendar-container {
+  max-width: 800px;
+  margin: 30px auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border: 1px solid #e1e5e9;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e1e5e9;
+}
+
+.calendar-header h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.calendar-btn {
+  background: #87ceeb;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.calendar-btn:hover {
+  background: #5f9ea0;
+  transform: translateY(-1px);
+}
+
+.calendar-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.calendar-table th {
+  background: #f8f9fa;
+  padding: 18px 15px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #495057;
+  border-bottom: 2px solid #e9ecef;
+  letter-spacing: 0.5px;
+}
+
+.calendar-table td {
+  padding: 18px 15px;
+  text-align: center;
+  border: 1px solid #f1f3f4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 15px;
+  color: #2c3e50;
+  position: relative;
+}
+
+.calendar-table td:hover {
+  background: #f8f9fa;
+  transform: scale(1.02);
+}
+
+.calendar-table td.has-til {
+  background: #e0f6ff;
+  font-weight: 600;
+  color: #2c5aa0;
+  border: 2px solid #87ceeb;
+}
+
+.calendar-table td.has-til:hover {
+  background: #b3e0ff;
+  transform: scale(1.05);
+}
+
+.calendar-table td.has-til a {
+  color: #2c5aa0;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.calendar-table td.has-til a:hover {
+  color: #1e3a8a;
+}
+
+.calendar-table td.other-month {
+  color: #bdc3c7;
+  background: #fafbfc;
+}
+
+.calendar-table td.today {
+  background: #fff3cd;
+  font-weight: 700;
+  color: #856404;
+  border: 2px solid #fdcb6e;
+  position: relative;
+}
+
+.calendar-table td.today::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: #f39c12;
+  border-radius: 50%;
+}
+
+
+
+@media (max-width: 768px) {
+  .calendar-container {
+    margin: 15px;
+    padding: 20px;
+  }
+  
+  .calendar-header h3 {
+    font-size: 20px;
+  }
+  
+  .calendar-table td {
+    padding: 12px 8px;
+    font-size: 14px;
+  }
+  
+  .calendar-table th {
+    padding: 15px 8px;
+    font-size: 13px;
+  }
+  
+
+}
+</style>
+
+<script>
+// TIL 게시물 데이터 - 실제 _posts 폴더의 TIL 게시물들과 연동
+const tilPosts = {
+  '2025-08-04': {
+    title: 'TIL - 2025년 8월 4일',
+    url: '/posts/til-250804/',
+  }
+};
+
+// 최소 날짜 설정 (2025년 8월 1일)
+const MIN_DATE = new Date(2025, 7, 1); // 2025년 8월 1일
+
+let currentDate = new Date(2025, 7, 1); // 2025년 8월 1일
+
+function updateCalendar() {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  
+  document.getElementById('currentMonth').textContent = `${year}년 ${month + 1}월`;
+  
+  // 이전 월 버튼 비활성화/활성화
+  const prevBtn = document.getElementById('prevMonth');
+  const isMinDate = currentDate.getFullYear() === MIN_DATE.getFullYear() && 
+                   currentDate.getMonth() === MIN_DATE.getMonth();
+  prevBtn.disabled = isMinDate;
+  
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const startDate = new Date(firstDay);
+  startDate.setDate(startDate.getDate() - firstDay.getDay());
+  
+  const calendarBody = document.getElementById('calendarBody');
+  calendarBody.innerHTML = '';
+  
+  const today = new Date();
+  
+  for (let week = 0; week < 6; week++) {
+    const row = document.createElement('tr');
+    
+    for (let day = 0; day < 7; day++) {
+      const cell = document.createElement('td');
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + week * 7 + day);
+      
+      const dateString = currentDate.toISOString().split('T')[0];
+      const dayNumber = currentDate.getDate();
+      
+      // 오늘 날짜 체크
+      const isToday = currentDate.toDateString() === today.toDateString();
+      // 현재 월이 아닌 날짜 체크
+      const isOtherMonth = currentDate.getMonth() !== month;
+      // TIL 게시물이 있는 날짜 체크
+      const hasTil = tilPosts[dateString];
+      
+      if (isOtherMonth) {
+        cell.className = 'other-month';
+        cell.textContent = dayNumber;
+      } else if (hasTil) {
+        cell.className = 'has-til';
+        cell.innerHTML = `<a href="${hasTil.url}" title="${hasTil.title}">${dayNumber}</a>`;
+      } else {
+        cell.textContent = dayNumber;
+      }
+      
+      if (isToday) {
+        cell.classList.add('today');
+      }
+      
+      row.appendChild(cell);
+    }
+    
+    calendarBody.appendChild(row);
+  }
+}
+
+// 이벤트 리스너
+document.getElementById('prevMonth').addEventListener('click', () => {
+  const newDate = new Date(currentDate);
+  newDate.setMonth(newDate.getMonth() - 1);
+  
+  // 최소 날짜보다 이전으로 이동하려고 하면 무시
+  if (newDate >= MIN_DATE) {
+    currentDate = newDate;
+    updateCalendar();
+  }
+});
+
+document.getElementById('nextMonth').addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  updateCalendar();
+});
+
+// 초기화
+updateCalendar();
+</script>
