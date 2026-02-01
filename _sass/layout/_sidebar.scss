@@ -18,6 +18,8 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
   width: v.$sidebar-width;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border-color);
+  border-left: 4px solid var(--accent, transparent);
+  box-shadow: 2px 0 12px rgba(93, 155, 46, 0.04);
 
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -58,19 +60,27 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     width: 6.5rem;
     height: 6.5rem;
     overflow: hidden;
-    box-shadow: var(--avatar-border-color) 0 0 0 2px;
-    transform: translateZ(0); /* fixed the zoom in Safari */
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+      var(--avatar-border-color) 0 0 0 3px;
+    transform: translateZ(0);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 
     @include bp.sm {
       width: 7rem;
       height: 7rem;
     }
 
+    &:hover {
+      box-shadow: 0 6px 20px rgba(93, 155, 46, 0.15),
+        var(--avatar-border-color) 0 0 0 3px;
+    }
+
     img {
-      transition: transform 0.5s;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.08);
       }
     }
   }
@@ -134,26 +144,29 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
       }
 
       a.nav-link {
-        @include mx.pt-pb(0.6rem);
+        @include mx.pt-pb(0.7rem);
+        @include mx.pl-pr(1rem);
 
         display: flex;
         align-items: center;
-        border-radius: 0.75rem;
+        border-radius: 1rem;
         font-weight: 600;
+        transition: background-color 0.25s ease, transform 0.2s ease;
 
         &:hover {
           background-color: var(--sidebar-hover-bg);
+          transform: translateX(4px);
         }
 
         i {
           font-size: 95%;
-          opacity: 0.8;
-          margin-right: 1.5rem;
+          opacity: 0.85;
+          margin-right: 1.25rem;
         }
 
         span {
           font-size: 90%;
-          letter-spacing: 0.2px;
+          letter-spacing: 0.3px;
         }
       }
 
@@ -189,7 +202,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     %button {
       width: $btn-size;
       height: $btn-size;
-      margin-bottom: $btn-mb; // multi line gap
+      margin-bottom: $btn-mb;
       border-radius: 50%;
       color: var(--sidebar-btn-color);
       background-color: var(--sidebar-btn-bg);
@@ -197,6 +210,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background-color 0.25s ease, transform 0.2s ease;
 
       &:not(:focus-visible) {
         box-shadow: var(--sidebar-border-color) 0 0 0 1px;
@@ -204,6 +218,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
 
       &:hover {
         background-color: var(--sidebar-hover-bg);
+        transform: scale(1.1);
       }
     }
 

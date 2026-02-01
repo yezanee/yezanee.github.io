@@ -1,29 +1,34 @@
 @mixin styles {
-  /* Framework color */
-  --main-bg: white;
+  /* Accent: clover green */
+  --accent: #5d9b2e;
+  --accent-soft: rgba(93, 155, 46, 0.12);
+
+  /* Framework color - soft warm tint */
+  --main-bg: #fafaf8;
   --mask-bg: #c1c3c5;
-  --main-border-color: #f3f3f3;
+  --main-border-color: #ebeae6;
 
   /* Common color */
-  --text-color: #34343c;
-  --text-muted-color: #757575;
+  --text-color: #2d2d2d;
+  --text-muted-color: #6b6b6b;
   --text-muted-highlight-color: inherit;
-  --heading-color: #2a2a2a;
-  --label-color: #585858;
-  --blockquote-border-color: #eeeeee;
-  --blockquote-text-color: #757575;
-  --link-color: #0056b2;
-  --link-underline-color: #dee2e6;
+  --heading-color: #1a1a1a;
+  --label-color: #505050;
+  --blockquote-border-color: rgba(93, 155, 46, 0.35);
+  --blockquote-text-color: #6b6b6b;
+  --blockquote-bg: rgba(93, 155, 46, 0.04);
+  --link-color: var(--accent);
+  --link-underline-color: rgba(93, 155, 46, 0.35);
   --button-bg: #ffffff;
-  --btn-border-color: #e9ecef;
+  --btn-border-color: #e5e5e5;
   --btn-backtotop-color: #686868;
   --btn-backtotop-border-color: #f1f1f1;
   --checkbox-color: #c5c5c5;
-  --checkbox-checked-color: #07a8f7;
+  --checkbox-checked-color: var(--accent);
   --img-bg: radial-gradient(
     circle,
-    rgb(255, 255, 255) 0%,
-    rgb(239, 239, 239) 100%
+    rgb(250, 250, 250) 0%,
+    rgb(240, 240, 240) 100%
   );
   --shimmer-bg: linear-gradient(
     90deg,
@@ -32,17 +37,17 @@
     rgba(250, 250, 250, 0) 100%
   );
 
-  /* Sidebar */
-  --site-title-color: rgb(113, 113, 113);
-  --site-subtitle-color: #717171;
-  --sidebar-bg: #f6f8fa;
-  --sidebar-border-color: #efefef;
+  /* Sidebar - simple, calm, cozy */
+  --site-title-color: #2d2d2d;
+  --site-subtitle-color: #6b6b6b;
+  --sidebar-bg: #f6f6f4;
+  --sidebar-border-color: #e8e6e2;
   --sidebar-muted-color: #545454;
-  --sidebar-active-color: #1d1d1d;
-  --sidebar-hover-bg: rgb(223, 233, 241, 0.64);
+  --sidebar-active-color: var(--accent);
+  --sidebar-hover-bg: var(--accent-soft);
   --sidebar-btn-bg: white;
-  --sidebar-btn-color: #8e8e8e;
-  --avatar-border-color: white;
+  --sidebar-btn-color: #7a7a7a;
+  --avatar-border-color: #e8e8e8;
 
   /* Topbar */
   --topbar-bg: rgb(255, 255, 255, 0.7);
@@ -57,36 +62,39 @@
   --btn-paginator-hover-color: var(--sidebar-bg);
 
   /* Posts */
-  --toc-highlight: #0550ae;
-  --toc-popup-border-color: lightgray;
-  --btn-share-color: gray;
-  --btn-share-hover-color: #0d6efd;
-  --card-bg: white;
-  --card-hovor-bg: #e2e2e2;
-  --card-shadow: rgb(104, 104, 104, 0.05) 0 2px 6px 0,
-    rgba(211, 209, 209, 0.15) 0 0 0 1px;
-  --footnote-target-bg: lightcyan;
-  --tb-odd-bg: #fbfcfd;
+  --toc-highlight: var(--accent);
+  --toc-popup-border-color: #e5e5e5;
+  --btn-share-color: #7a7a7a;
+  --btn-share-hover-color: var(--accent);
+  --card-bg: #ffffff;
+  --card-hovor-bg: var(--accent-soft);
+  --card-shadow: 0 2px 8px rgba(93, 155, 46, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+  --card-hover-shadow: 0 8px 24px rgba(93, 155, 46, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  --card-radius: 18px;
+  --footnote-target-bg: var(--accent-soft);
+  --tb-odd-bg: #fafafa;
   --tb-border-color: #eaeaea;
-  --dash-color: silver;
-  --kbd-wrap-color: #bdbdbd;
+  --dash-color: #c0c0c0;
+  --kbd-wrap-color: #d0d0d0;
   --kbd-text-color: var(--text-color);
-  --kbd-bg-color: white;
+  --kbd-bg-color: #f8f8f8;
   --prompt-text-color: rgb(46, 46, 46, 0.77);
-  --prompt-tip-bg: rgb(123, 247, 144, 0.2);
-  --prompt-tip-icon-color: #03b303;
-  --prompt-info-bg: #e1f5fe;
-  --prompt-info-icon-color: #0070cb;
+  --prompt-tip-bg: var(--accent-soft);
+  --prompt-tip-icon-color: var(--accent);
+  --prompt-info-bg: #e8f4e8;
+  --prompt-info-icon-color: var(--accent);
   --prompt-warning-bg: rgb(255, 243, 205);
-  --prompt-warning-icon-color: #ef9c03;
+  --prompt-warning-icon-color: #c9a227;
   --prompt-danger-bg: rgb(248, 215, 218, 0.56);
-  --prompt-danger-icon-color: #df3c30;
+  --prompt-danger-icon-color: #c0392b;
 
   /* Tags */
-  --tag-border: #dee2e6;
+  --tag-border: #e5e5e5;
   --tag-shadow: var(--btn-border-color);
-  --tag-hover: rgb(222, 226, 230);
-  --search-tag-bg: #f8f9fa;
+  --tag-hover: var(--accent-soft);
+  --search-tag-bg: #f5f5f5;
 
   /* Categories */
   --categories-border: rgba(0, 0, 0, 0.125);
@@ -94,21 +102,21 @@
   --categories-icon-hover-color: darkslategray;
 
   /* Archive */
-  --timeline-color: rgba(0, 0, 0, 0.075);
-  --timeline-node-bg: #c2c6cc;
+  --timeline-color: rgba(0, 0, 0, 0.06);
+  --timeline-node-bg: var(--accent);
   --timeline-year-dot-color: #ffffff;
 
   /* --- Custom code light mode colors --- */
-  --language-border-color: #ececec;
-  --highlight-bg-color: #f6f8fa;
-  --highlighter-rouge-color: #3f596f;
-  --highlight-lineno-color: #9e9e9e;
-  --inline-code-bg: rgba(25, 25, 28, 0.05);
-  --code-color: #3a3a3a;
-  --code-header-text-color: #a3a3a3;
+  --language-border-color: #e8e8e8;
+  --highlight-bg-color: #f5f5f5;
+  --highlighter-rouge-color: #3a4a3a;
+  --highlight-lineno-color: #8e8e8e;
+  --inline-code-bg: var(--accent-soft);
+  --code-color: #2d2d2d;
+  --code-header-text-color: #8e8e8e;
   --code-header-muted-color: #e5e5e5;
-  --code-header-icon-color: #c9c8c8;
-  --clipboard-checked-color: #43c743;
+  --code-header-icon-color: #c0c0c0;
+  --clipboard-checked-color: var(--accent);
 
   [class^='prompt-'] {
     --link-underline-color: rgb(219, 216, 216);
@@ -187,7 +195,7 @@
   }
 
   .highlight .kc {
-    color: #0550ae;
+    color: var(--accent);
   }
 
   .highlight .l,
@@ -200,27 +208,27 @@
   .highlight .il,
   .highlight .mo,
   .highlight .mx {
-    color: #0550ae;
+    color: #4a7c2e;
   }
 
   .highlight .sb {
-    color: #0550ae;
+    color: #4a7c2e;
   }
 
   .highlight .bp {
-    color: #0550ae;
+    color: var(--accent);
   }
 
   .highlight .ne {
-    color: #0550ae;
+    color: var(--accent);
   }
 
   .highlight .nl {
-    color: #0550ae;
+    color: var(--accent);
   }
 
   .highlight .py {
-    color: #0550ae;
+    color: var(--accent);
   }
 
   .highlight .nv,
@@ -228,21 +236,21 @@
   .highlight .vg,
   .highlight .vi,
   .highlight .vm {
-    color: #0550ae;
+    color: #4a7c2e;
   }
 
   .highlight .o,
   .highlight .ow {
-    color: #0550ae;
+    color: var(--accent);
   }
 
   .highlight .gh {
-    color: #0550ae;
+    color: var(--accent);
     font-weight: bold;
   }
 
   .highlight .gu {
-    color: #0550ae;
+    color: var(--accent);
     font-weight: bold;
   }
 
@@ -257,7 +265,7 @@
   .highlight .sx,
   .highlight .s1,
   .highlight .ss {
-    color: #0a3069;
+    color: #2d5a1a;
   }
 
   .highlight .nd {

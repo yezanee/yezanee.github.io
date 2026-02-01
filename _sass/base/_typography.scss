@@ -55,10 +55,13 @@ img {
 }
 
 blockquote {
-  border-left: 0.125rem solid var(--blockquote-border-color);
-  padding-left: 1rem;
+  border-left: 0.25rem solid var(--blockquote-border-color);
+  padding-left: 1.25rem;
+  margin-left: 0.25rem;
+  border-radius: 0 8px 8px 0;
   color: var(--blockquote-text-color);
   margin-top: 0.5rem;
+  background: var(--blockquote-bg, transparent);
 
   > p:last-child {
     margin-bottom: 0;
@@ -67,7 +70,7 @@ blockquote {
   &[class^='prompt-'] {
     border-left: 0;
     position: relative;
-    padding: 1rem 1rem 1rem 3rem;
+    padding: 1rem 1.25rem 1rem 3rem;
     color: var(--prompt-text-color);
 
     @extend %rounded;
@@ -148,10 +151,12 @@ sup {
 }
 
 main {
-  line-height: 1.75;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
 
   h1 {
     margin-top: 2rem;
+    letter-spacing: -0.02em;
 
     @include bp.lg {
       margin-top: 3rem;
